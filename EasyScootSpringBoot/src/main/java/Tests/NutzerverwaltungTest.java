@@ -1,13 +1,13 @@
-package EasyScoot.Tests;
+package Tests;
 
-import EasyScoot.Klassen.Nutzerverwaltung;
-import EasyScoot.Models.Datenbank;
+import Klassen.Nutzerverwaltung;
+import Models.Datenbank;
 
 import org.junit.*;
 
 public class NutzerverwaltungTest {
 
-    private static Nutzerverwaltung nutzerverwaltung = new Nutzerverwaltung();
+    private static Nutzerverwaltung nutzerverwaltung = new Klassen.Nutzerverwaltung();
     private static Datenbank datenbank;
 
     @Test
@@ -70,7 +70,8 @@ public class NutzerverwaltungTest {
      * // Überprüfen, ob der Benutzer erfolgreich abgemeldet wurde
      * Assert.assertFalse(datenbank.accountList.get(0).isLoggedIn());
      * // Überprüfen, ob der Benutzer nicht abgemeldet wird, wenn er nicht
-     * angemeldet ist
+     * angemeldet
+     * // ist
      * nutzerverwaltung.logout("test@gmail.com");
      * Assert.assertFalse(datenbank.accountList.get(0).isLoggedIn());
      * }
@@ -82,10 +83,11 @@ public class NutzerverwaltungTest {
      * // Überprüfen, ob das Konto erfolgreich deaktiviert wurde
      * Assert.assertFalse(datenbank.accountList.get(0).isActive());
      * // Überprüfen, ob das Konto nicht deaktiviert wird, wenn die E-Mail-Adresse
-     * nicht gefunden wird
+     * // nicht gefunden wird
      * nutzerverwaltung.disableAccount("nonexistent@gmail.com");
      * Assert.assertTrue(datenbank.accountList.get(0).isActive()); // Konto sollte
      * weiterhin deaktiviert sein
      * }
      */
+
 }

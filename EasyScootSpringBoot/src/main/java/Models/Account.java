@@ -1,4 +1,4 @@
-package EasyScoot.Models;
+package Models;
 
 /**
  * Diese Klasse repräsentiert ein Benutzerkonto mit einer E-Mail-Adresse und

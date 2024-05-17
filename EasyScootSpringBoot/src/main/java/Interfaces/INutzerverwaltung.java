@@ -1,4 +1,4 @@
-package EasyScoot.Interfaces;
+package Interfaces;
 
 /**
  * Dieses Interface definiert die Methoden zur Verwaltung von Benutzerkonten.

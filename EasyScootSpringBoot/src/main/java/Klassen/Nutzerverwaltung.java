@@ -1,8 +1,8 @@
-package EasyScoot.Klassen;
+package Klassen;
 
-import EasyScoot.Interfaces.INutzerverwaltung;
-import EasyScoot.Models.Account;
-import EasyScoot.Models.Datenbank;
+import Interfaces.INutzerverwaltung;
+import Models.Account;
+import Models.Datenbank;
 
 /**
  * Diese Klasse verwaltet Benutzerkonten, indem sie die Erstellung, Löschung,
