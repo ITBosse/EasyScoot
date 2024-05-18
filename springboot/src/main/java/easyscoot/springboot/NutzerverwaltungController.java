@@ -13,13 +13,22 @@ public class NutzerverwaltungController {
     private Nutzerverwaltung nutzerverwaltung;
 
     @PostMapping("/login")
-    public boolean checkAccount(@RequestParam String email, @RequestParam String password) {
-        return nutzerverwaltung.checkAccount(email, password);
+    public String checkAccount(@RequestParam String email, @RequestParam String password) {
+        boolean loginSuccess = nutzerverwaltung.checkAccount(email, password);
+        if (loginSuccess) {
+            return "redirect:/homepage"; // Hier könnte auch eine JSP/HTML-Seite zurückgegeben werden
+        }
+        return "redirect:/index.html?error=true"; // Falscher Login
     }
 
     @PostMapping("/create")
-    public void createAccount(@RequestParam String email, @RequestParam String password) {
-        nutzerverwaltung.createAccount(email, password);
+    public String createAccount(@RequestParam String email, @RequestParam String password) {
+        boolean emailExists = nutzerverwaltung.createAccount(email, password);
+        if (!emailExists) {
+            return "redirect:/index.html?success=true"; // Konto erfolgreich erstellt
+        } else {
+            return "redirect:/register.html?error=emailExists"; // Konto konnte nicht erstellt werden
+        }
     }
 
     @DeleteMapping("/delete")

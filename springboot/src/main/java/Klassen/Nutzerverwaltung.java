@@ -34,7 +34,7 @@ public class Nutzerverwaltung implements INutzerverwaltung {
      * @param password     Das Passwort des neuen Kontos.
      */
     @Override
-    public void createAccount(String emailAddress, String password) {
+    public boolean createAccount(String emailAddress, String password) {
         boolean emailExists = false;
         for (Account ac : Datenbank.accountList) {
             if (ac.getEmailAddress().equals(emailAddress)) {
@@ -46,6 +46,8 @@ public class Nutzerverwaltung implements INutzerverwaltung {
             Account account = new Account(emailAddress, password);
             Datenbank.accountList.add(account);
         }
+
+        return emailExists;
     }
 
     /**

@@ -3,18 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account Management</title>
+    <title>EasyScoot</title>
 </head>
 <body>
-    <h1>Welcome to User Account Management</h1>
+    <h1>EasySCOOOOOOOOt</h1>
 
     <h2>Login</h2>
-    <form action="/login" method="post">
-        Email: <input type="email" name="email" required><br>
-        Password: <input type="password" name="password" required><br>
+    <form id="loginForm">
+        Email: <input type="email" id="email" name="email" required><br><br>
+        Password: <input type="password" id="password" name="password" required><br><br>
         <button type="submit">Login</button>
     </form>
 
-    <p>Don't have an account? <a href="creatAccount.html">Register</a></p>
+    <p>Kein Account? <a href="createAccount.html">Registrieren</a></p>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/accounts/login', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    if (xhr.responseText === 'redirect:/homepage') {
+                        window.location.href = '/homepage';
+                    } else {
+                        alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldeinformationen.');
+                    }
+                }
+            };
+
+            xhr.send('email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));
+        });
+    </script>
 </body>
 </html>

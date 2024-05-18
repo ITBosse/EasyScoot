@@ -13,7 +13,7 @@ public interface INutzerverwaltung {
      * @param emailAddress Die E-Mail-Adresse des neuen Kontos.
      * @param newPassword  Das Passwort des neuen Kontos.
      */
-    public void createAccount(String emailAddress, String newPassword);
+    public boolean createAccount(String emailAddress, String newPassword);
 
     /**
      * Löscht ein bestehendes Benutzerkonto.
