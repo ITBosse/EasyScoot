@@ -23,27 +23,40 @@
             var password = document.getElementById('password').value;
             var confirmPassword = document.getElementById('confirmPassword').value;
 
+            console.log("Email:", email);
+            console.log("Password:", password);
+            console.log("Confirm Password:", confirmPassword);
+
             if (password !== confirmPassword) {
                 alert('Passwörter stimmen nicht überein. Bitte überprüfen Sie Ihre Eingabe.');
+                console.log("Passwörter stimmen nicht überein.");
                 return; // Beende die Funktion, wenn die Passwörter nicht übereinstimmen
             }
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/api/accounts/create', true);
+            xhr.open('POST', 'http://localhost:8080/api/accounts/create', true); // URL entsprechend geändert
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    if (xhr.responseText === 'redirect:/index.html?success=true') {
-                        window.location.href = '/index.html?success=true'; // Umleitung zur Indexseite bei erfolgreicher Registrierung
-                    } else if (xhr.responseText === 'redirect:/register.html?error=emailExists') {
-                        alert('Die E-Mail-Adresse ist bereits registriert.');
+                console.log("readyState:", xhr.readyState);
+                console.log("status:", xhr.status);
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    console.log("Response:", xhr.responseText);
+                    if (xhr.status === 200) {
+                        if (xhr.responseText === 'redirect:/index.html') {
+                            window.location.href = '/index.html'; // Umleitung zur Indexseite bei erfolgreicher Registrierung
+                        } else if (xhr.responseText === 'redirect:/register.html') {
+                            alert('Die E-Mail-Adresse ist bereits registriert.');
+                        } else {
+                            alert('Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.');
+                        }
                     } else {
-                        alert('Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.');
+                        alert('Ein Fehler ist aufgetreten. Status: ' + xhr.status);
                     }
                 }
             };
 
+            console.log("Sending request with email:", email, "and password:", password);
             xhr.send('email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));
         }
     </script>

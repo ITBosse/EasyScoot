@@ -25,9 +25,9 @@ public class NutzerverwaltungController {
     public String createAccount(@RequestParam String email, @RequestParam String password) {
         boolean emailExists = nutzerverwaltung.createAccount(email, password);
         if (!emailExists) {
-            return "redirect:/index.html?success=true"; // Konto erfolgreich erstellt
+            return "redirect:/index.html"; // Konto erfolgreich erstellt
         } else {
-            return "redirect:/register.html?error=emailExists"; // Konto konnte nicht erstellt werden
+            return "redirect:/register.html"; // Konto konnte nicht erstellt werden
         }
     }
 
