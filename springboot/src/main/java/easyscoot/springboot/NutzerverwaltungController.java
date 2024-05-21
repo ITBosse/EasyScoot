@@ -16,9 +16,9 @@ public class NutzerverwaltungController {
     public String checkAccount(@RequestParam String email, @RequestParam String password) {
         boolean loginSuccess = nutzerverwaltung.checkAccount(email, password);
         if (loginSuccess) {
-            return "redirect:/homepage"; // Hier könnte auch eine JSP/HTML-Seite zurückgegeben werden
+            return "redirect:/homepage.html";
         }
-        return "redirect:/index.html?error=true"; // Falscher Login
+        return ""; // Falscher Login
     }
 
     @PostMapping("/create")

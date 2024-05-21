@@ -15,6 +15,9 @@
         <button type="submit" onclick="clicked(event)">Registrieren</button>
     </form>
 
+    <p>Doch Account? <a href="index.html">Einloggen</a></p>
+
+
     <script>
         function clicked(event) {
             event.preventDefault(); // Verhindert das Standardformular-Submit-Verhalten
@@ -44,7 +47,7 @@
                     console.log("Response:", xhr.responseText);
                     if (xhr.status === 200) {
                         if (xhr.responseText === 'redirect:/index.html') {
-                            window.location.href = '/index.html'; // Umleitung zur Indexseite bei erfolgreicher Registrierung
+                            window.location.href = 'index.html'; // Umleitung zur Indexseite bei erfolgreicher Registrierung
                         } else if (xhr.responseText === 'redirect:/register.html') {
                             alert('Die E-Mail-Adresse ist bereits registriert.');
                         } else {

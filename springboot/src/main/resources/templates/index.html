@@ -12,33 +12,51 @@
     <form id="loginForm">
         Email: <input type="email" id="email" name="email" required><br><br>
         Password: <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
+        <button type="submit" onclick="clicked(event)">Login</button>
     </form>
 
     <p>Kein Account? <a href="createAccount.html">Registrieren</a></p>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-
+        function clicked(event) {
+            // Verhindern Sie das Standardverhalten des Buttons (wenn es sich um einen Form-Button handelt)
+            event.preventDefault();
+    
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
-
+    
+            console.log('Email:', email);
+            console.log('Password:', password);
+    
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/api/accounts/login', true);
+            xhr.open('POST', 'http://localhost:8080/api/accounts/login', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
+    
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    if (xhr.responseText === 'redirect:/homepage') {
-                        window.location.href = '/homepage';
+                console.log('XHR readyState:', xhr.readyState);
+                console.log('XHR status:', xhr.status);
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    console.log('XHR responseText:', xhr.responseText);
+                    if (xhr.status === 200) {
+                        if (xhr.responseText === 'redirect:/homepage') {
+                            console.log('Login successful. Redirecting to homepage.');
+                            window.location.href = 'homepage.html';
+                        } else {
+                            console.log('Login failed. Incorrect credentials.');
+                            alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldeinformationen.');
+                        }
                     } else {
-                        alert('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldeinformationen.');
+                        console.log('Server returned an error:', xhr.status, xhr.statusText);
+                        alert('Es gab ein Problem mit der Anmeldung. Bitte versuchen Sie es später erneut.');
                     }
                 }
             };
-
-            xhr.send('email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));
-        });
+    
+            var encodedData = 'email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password);
+            console.log('Encoded data:', encodedData);
+            xhr.send(encodedData);
+        }
     </script>
-</body>
+    
+</body>     
 </html>
