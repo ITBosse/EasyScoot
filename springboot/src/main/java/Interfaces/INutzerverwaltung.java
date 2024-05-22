@@ -20,7 +20,7 @@ public interface INutzerverwaltung {
      * 
      * @param emailAddress Die E-Mail-Adresse des zu löschenden Kontos.
      */
-    public void deleteAccount(String emailAddress);
+    public boolean deleteAccount(String emailAddress);
 
     /**
      * Ändert die E-Mail-Adresse eines bestehenden Benutzerkontos.
@@ -28,7 +28,7 @@ public interface INutzerverwaltung {
      * @param currentAddress Die aktuelle E-Mail-Adresse des Kontos.
      * @param newAddress     Die neue E-Mail-Adresse des Kontos.
      */
-    public void changeEmailAddress(String currentAddress, String newAddress);
+    public boolean changeEmailAddress(String currentAddress, String newAddress);
 
     /**
      * Ändert das Passwort eines bestehenden Benutzerkontos.
@@ -36,7 +36,7 @@ public interface INutzerverwaltung {
      * @param emailAddress Die E-Mail-Adresse des Kontos.
      * @param newPassword  Das neue Passwort des Kontos.
      */
-    public void changePassword(String emailAddress, String newPassword);
+    public boolean changePassword(String emailAddress, String newPassword);
 
     /**
      * Meldet einen Benutzer an.

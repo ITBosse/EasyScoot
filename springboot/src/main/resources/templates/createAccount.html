@@ -57,7 +57,7 @@
                         alert('Ein Fehler ist aufgetreten. Status: ' + xhr.status);
                     }
                 }
-            };
+            }
 
             console.log("Sending request with email:", email, "and password:", password);
             xhr.send('email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));

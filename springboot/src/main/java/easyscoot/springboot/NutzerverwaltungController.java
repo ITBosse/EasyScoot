@@ -7,6 +7,7 @@ import Klassen.Nutzerverwaltung;
 
 @RestController
 @RequestMapping("/api/accounts")
+@CrossOrigin(origins = "http/localhost:8080")
 public class NutzerverwaltungController {
 
     @Autowired
@@ -37,8 +38,8 @@ public class NutzerverwaltungController {
     }
 
     @PutMapping("/updateEmail")
-    public void updateEmail(@RequestParam String oldEmail, @RequestParam String newEmail) {
-        nutzerverwaltung.changeEmailAddress(oldEmail, newEmail);
+    public boolean updateEmail(@RequestParam String oldEmail, @RequestParam String newEmail) {
+        return nutzerverwaltung.changeEmailAddress(oldEmail, newEmail);
     }
 
     @PutMapping("/updatePassword")

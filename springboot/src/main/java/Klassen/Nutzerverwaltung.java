@@ -56,8 +56,8 @@ public class Nutzerverwaltung implements INutzerverwaltung {
      * @param emailAddress Die E-Mail-Adresse des zu löschenden Kontos.
      */
     @Override
-    public void deleteAccount(String emailAddress) {
-        Datenbank.accountList.removeIf(ac -> ac.getEmailAddress().equals(emailAddress));
+    public boolean deleteAccount(String emailAddress) {
+        return Datenbank.accountList.removeIf(ac -> ac.getEmailAddress().equals(emailAddress));
     }
 
     /**
@@ -67,12 +67,14 @@ public class Nutzerverwaltung implements INutzerverwaltung {
      * @param newEmailAddress     Die neue E-Mail-Adresse des Kontos.
      */
     @Override
-    public void changeEmailAddress(String currentEmailAddress, String newEmailAddress) {
+    public boolean changeEmailAddress(String currentEmailAddress, String newEmailAddress) {
         for (Account ac : Datenbank.accountList) {
             if (ac.getEmailAddress().equals(currentEmailAddress)) {
                 ac.setEmailAddress(newEmailAddress);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -82,12 +84,14 @@ public class Nutzerverwaltung implements INutzerverwaltung {
      * @param newPassword  Das neue Passwort des Kontos.
      */
     @Override
-    public void changePassword(String emailAddress, String newPassword) {
+    public boolean changePassword(String emailAddress, String newPassword) {
         for (Account ac : Datenbank.accountList) {
             if (ac.getEmailAddress().equals(emailAddress)) {
                 ac.setPassword(newPassword);
+                return true;
             }
         }
+        return false;
     }
 
     /**

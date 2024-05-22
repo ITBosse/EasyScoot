@@ -6,11 +6,45 @@
     <title>Email aktualisieren</title>
 </head>
 <body>
-    <h1>Update Email</h1>
-    <form action="/api/accounts/updateEmail" method="put">
-        Alte Email: <input type="email" name="oldEmail" required><br><br>   
-        Neue Email: <input type="email" name="newEmail" required><br><br>
-        <button type="submit">Email aktualisieren</button>
+    <h1>Email aktualisieren</h1>
+    <form id="EmailUpdateForm">
+        Alte Email: <input id="oldEmail" name="oldEmail" required><br><br>   
+        Neue Email: <input id="newEmail" name="newEmail" required><br><br>
+        <button type="submit" onclick="clicked(event)">Email aktualisieren</button>
     </form>
+
+    <br><a href="homepage.html">Startseite</a>
+
+    <script>
+        function clicked(event){
+            event.preventDefault(); // Verhindert das Absenden des Formulars
+
+            var oldEmail = document.getElementById('oldEmail').value;
+            var newEmail = document.getElementById('newEmail').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', 'http://localhost:8080/api/accounts/updateEmail', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (xhr.responseText === 'true') {
+                            window.location.href = 'success.html'; 
+                        } else if (xhr.responseText === 'false') {
+                            alert('Die E-Mail-Adresse ist nicht vorhanden.');
+                        } else {
+                            alert('Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.');
+                        }
+                    } else {
+                        alert('Ein Fehler ist aufgetreten. Status: ' + xhr.status);
+                    }
+                }
+            };
+
+            var params = 'oldEmail=' + encodeURIComponent(oldEmail) + '&newEmail=' + encodeURIComponent(newEmail);
+            xhr.send(params);
+        }
+    </script>
 </body>
 </html>
